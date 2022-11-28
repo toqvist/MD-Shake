@@ -25,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         Sensor accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
+        Button spinButton = findViewById(R.id.buttonSpin);
+        ImageView starImage = findViewById(R.id.imageStar);
+
         SensorEventListener sel = new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent event) {
@@ -37,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
                 axisY.setText("Y: " + event.values[1]);
                 axisZ.setText("Z: " + event.values[2]);
 
+                starImage.setRotation(event.values[0]);
+
             }
 
             @Override
@@ -46,10 +51,6 @@ public class MainActivity extends AppCompatActivity {
         };
 
         sensorManager.registerListener(sel, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-
-        Button spinButton = findViewById(R.id.buttonSpin);
-        ImageView starImage = findViewById(R.id.imageStar);
-
 
         spinButton.setOnClickListener(new View.OnClickListener() {
             int starY = 0;
@@ -62,6 +63,19 @@ public class MainActivity extends AppCompatActivity {
                 }
                 starY = newY;
                 starImage.setRotationX(starY);
+            }
+        });
+
+        Button resetButton = findViewById(R.id.buttonReset);
+
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                sensorManager.unregisterListener(sel);
+                sensorManager.registerListener(sel, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+
+
             }
         });
 
