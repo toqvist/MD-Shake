@@ -1,11 +1,17 @@
 package com.toqvist.shake;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.DialogInterface;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.Image;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -20,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
         Sensor accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         SensorEventListener sel = new SensorEventListener() {
-
             @Override
             public void onSensorChanged(SensorEvent event) {
 
@@ -38,11 +43,27 @@ public class MainActivity extends AppCompatActivity {
             public void onAccuracyChanged(Sensor sensor, int i) {
 
             }
-
-
         };
 
         sensorManager.registerListener(sel, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+
+        Button spinButton = findViewById(R.id.buttonSpin);
+        ImageView starImage = findViewById(R.id.imageStar);
+
+
+        spinButton.setOnClickListener(new View.OnClickListener() {
+            int starY = 0;
+            @Override
+            public void onClick(View v) {
+
+                int newY = starY + 30;
+                if(newY >= 360) {
+                    newY = 0;
+                }
+                starY = newY;
+                starImage.setRotationX(starY);
+            }
+        });
 
     }
 }

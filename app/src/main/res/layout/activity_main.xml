@@ -53,4 +53,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/axisY" />
 
+    <Button
+        android:id="@+id/buttonSpin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Spin!"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/imageStar"
+        app:layout_constraintTop_toBottomOf="@id/axisZ"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="30dp"/>
+
+    <ImageView
+        android:id="@+id/imageStar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:srcCompat="@android:drawable/btn_star_big_on"
+        app:layout_constraintStart_toEndOf="@id/buttonSpin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/axisZ"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="30dp"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
